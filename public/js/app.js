@@ -2069,6 +2069,1091 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ParkingGrid.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ParkingGrid.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    VueTimepicker: VueTimepicker
+  },
+  data: function data() {
+    return {
+      b_name: 'Block 1',
+      parked_slots: '',
+      reserved_slots: '',
+      isReserved: false,
+      time: null,
+      parking_id: '',
+      processing: false,
+      form: new Form({
+        slot_id: '',
+        name: '',
+        email: '',
+        phone_number: '',
+        status_id: 1
+      }),
+      form1: new Form({
+        phoneOrId: ''
+      }),
+      reserved_time: {
+        HH: moment().format('h'),
+        mm: moment().format('mm')
+      },
+      form2: new Form({
+        slot_id: '',
+        name: '',
+        email: '',
+        phone_number: '',
+        status_id: 1,
+        reserved_time: ''
+      }),
+      form3: new Form({
+        slot_id: '',
+        reservation_code: ''
+      }),
+      form4: new Form({
+        feedback: '',
+        parkingid: '',
+        rating: ''
+      })
+    };
+  },
+  computed: {
+    blockName: function blockName() {
+      return this.b_name;
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.refreshGrid();
+    this.$on('updateGrid', function () {
+      _this.refreshGrid();
+    });
+    setInterval(function () {
+      _this.checkExpireReservations();
+    }, 50000);
+  },
+  methods: {
+    checkExpireReservations: function checkExpireReservations() {
+      var _this2 = this;
+
+      axios.get('api/reserve/expire').then(function (_ref) {
+        var data = _ref.data;
+
+        _this2.refreshGrid();
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    openPaymentModal: function openPaymentModal() {
+      $('#paymentDetails').modal('hide');
+      $('#paymentModal').modal('show');
+    },
+    openFeedbackModal: function openFeedbackModal() {
+      axios.post('api/parking/settled', {
+        status: 0,
+        parking_id: this.parking_id
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        $('#paymentModal').modal('hide');
+        $('#feedbackModal').modal('show');
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    sendFeedback: function sendFeedback() {
+      this.form4.post('api/feedback').then(function (_ref3) {
+        var data = _ref3.data;
+
+        if (data.status == 200) {
+          $('#feedbackModal').modal('hide');
+          swal("Success!", "Thank you for your feedback!", "success", {
+            timer: 2000
+          });
+        } else {
+          $('#feedbackModal').modal('hide');
+          swal("Error!", data.message, "error", {
+            timer: 5000
+          });
+        }
+      })["catch"](function (err) {});
+    },
+    setTrue: function setTrue() {
+      this.onlyTime = true;
+    },
+    displayModal: function displayModal(id) {
+      if (this.parked_slots.includes(id)) {
+        return;
+      }
+
+      if (this.reserved_slots.includes(id)) {
+        this.isReserved = true;
+        this.form3.reset();
+        this.form3.clear();
+        this.b_name = 'Block ' + id;
+        this.form3.slot_id = id;
+        $('#enterReservationId').modal('show');
+        return;
+      } else {
+        this.isReserved = true;
+      }
+
+      this.form.reset();
+      this.form.clear();
+      this.form2.reset();
+      this.form2.clear();
+      this.form3.reset();
+      this.form3.clear();
+      this.b_name = 'Block ' + id;
+      this.form.slot_id = id;
+      this.form2.slot_id = id;
+      this.form3.slot_id = id;
+      $('#addnewuser').modal('show');
+    },
+    createUser: function createUser() {
+      var _this3 = this;
+
+      if (this.form3.reservation_code) {
+        this.form.reset();
+        this.form.clear();
+        this.form3.post('api/staff/check').then(function (_ref4) {
+          var data = _ref4.data;
+
+          if (data.status == 200) {
+            _this3.$emit('updateGrid');
+
+            $('#addnewuser').modal('hide');
+            swal("Success!", "You can park your vehicle here!", "success", {
+              timer: 2000
+            });
+          } else {
+            $('#addnewuser').modal('hide');
+            swal("Error!", data.message, "error", {
+              timer: 5000
+            });
+          }
+        })["catch"](function (err) {});
+      } else {
+        this.form3.reset();
+        this.form3.clear();
+        this.form.post('api/parking').then(function (_ref5) {
+          var data = _ref5.data;
+
+          if (data.status == 200) {
+            _this3.$emit('updateGrid');
+
+            $('#addnewuser').modal('hide');
+            swal("Success!", "You can park your vehicle here!", "success", {
+              timer: 2000
+            });
+          } else {
+            $('#addnewuser').modal('hide');
+            swal("Error!", data.message, "error", {
+              timer: 5000
+            });
+          }
+        })["catch"](function (err) {});
+      }
+    },
+    refreshGrid: function refreshGrid() {
+      var _this4 = this;
+
+      axios.get('api/parking').then(function (_ref6) {
+        var data = _ref6.data;
+        _this4.parked_slots = data.parked.map(function (slot) {
+          return slot.id;
+        });
+        _this4.reserved_slots = data.reserved.map(function (slot) {
+          return slot.id;
+        });
+        data.reserved.forEach(function (slot) {
+          var ls = [9, 10, 11, 12, 13, 14, 15, 16];
+
+          if (ls.includes(slot.id)) {
+            $('#' + slot.id).removeClass('parkingslot-available-left');
+            $('#' + slot.id).addClass('parkingslot-reserved-left');
+          } else {
+            $('#' + slot.id).removeClass('parkingslot-available-right');
+            $('#' + slot.id).addClass('parkingslot-reserved-right');
+          }
+        });
+        data.parked.forEach(function (slot) {
+          var ls = [9, 10, 11, 12, 13, 14, 15, 16];
+
+          if (ls.includes(slot.id)) {
+            $('#' + slot.id).removeClass('parkingslot-reserved-left');
+            $('#' + slot.id).removeClass('parkingslot-available-left');
+            $('#' + slot.id).addClass('parkingslot-booked-left');
+            $('#' + slot.id).html('<img class="parking-car-left" src="img/car.png" width="100%" alt="">');
+          } else {
+            $('#' + slot.id).removeClass('parkingslot-reserved-right');
+            $('#' + slot.id).removeClass('parkingslot-available-right');
+            $('#' + slot.id).addClass('parkingslot-booked-right');
+            $('#' + slot.id).html('<img class="parking-car-right" src="img/car.png" width="100%" alt="">');
+          }
+        });
+        data.free.forEach(function (slot) {
+          var ls = [9, 10, 11, 12, 13, 14, 15, 16];
+
+          if (ls.includes(slot.id)) {
+            $('#' + slot.id).removeClass('parkingslot-booked-left');
+            $('#' + slot.id).removeClass('parkingslot-reserved-left');
+            $('#' + slot.id).addClass('parkingslot-available-left');
+            $('#' + slot.id).html(slot.id);
+          } else {
+            $('#' + slot.id).removeClass('parkingslot-booked-right');
+            $('#' + slot.id).removeClass('parkingslot-reserved-right');
+            $('#' + slot.id).addClass('parkingslot-available-right');
+            $('#' + slot.id).html(slot.id);
+          }
+        });
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    userCheckout: function userCheckout() {
+      var _this5 = this;
+
+      this.form1.post('api/parking/check').then(function (_ref7) {
+        var data = _ref7.data;
+
+        if (data.status == 400) {
+          $('#enterPhoneNumber').modal('hide');
+          swal("Error!", data.message, "error", {
+            timer: 3000
+          });
+        } else if (data.status == 200) {
+          _this5.parking_id = data.parking_id;
+          _this5.form4.parking_id = data.parking_id;
+
+          _this5.$emit('updateGrid');
+
+          $('#enterPhoneNumber').modal('hide');
+          $('#feedbackModal').modal('show');
+        } else {
+          $('#enterPhoneNumber').modal('hide');
+          $('#cn').text(data.phone_number);
+          $('#ri').text(data.reservation_id != '' ? data.reservation_id : 'N/A');
+          $('#in_time').text(data.in_Time);
+          $('#out_time').text(data.out_Time);
+          $('#total_time').text(data.diff);
+          $('#charge').text('LKR ' + data.charges);
+          $('#paymentDetails').modal('show');
+          _this5.parking_id = data.parking_id;
+          _this5.form4.parking_id = data.parking_id;
+
+          _this5.$emit('updateGrid');
+        }
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    reserveSlot: function reserveSlot() {
+      var _this6 = this;
+
+      if (this.form3.reservation_code) {
+        this.form2.reset();
+        this.form2.clear();
+        this.$Progress.start();
+        this.processing = true;
+        var dataSet = {
+          slot_id: this.form3.slot_id,
+          reservation_code: this.form3.reservation_code,
+          reserved_time: this.reserved_time
+        };
+        axios.post('api/staff/reserve', dataSet).then(function (_ref8) {
+          var data = _ref8.data;
+
+          if (data.status == 200) {
+            _this6.$emit('updateGrid');
+
+            $('#addnewuser').modal('hide');
+
+            _this6.$Progress.finish();
+
+            _this6.processing = false;
+            swal("Success!", "You have reserved this block!", "success", {
+              timer: 2000
+            });
+          } else {
+            _this6.processing = false;
+
+            _this6.$Progress.fail();
+
+            swal("Error!", data.message, "error", {
+              timer: 5000
+            });
+          }
+        })["catch"](function (err) {
+          _this6.processing = false;
+
+          _this6.$Progress.fail();
+        });
+      } else {
+        this.$Progress.start();
+        this.processing = true;
+        this.form2.reserved_time = this.reserved_time;
+        this.form2.post('api/reserve').then(function (_ref9) {
+          var data = _ref9.data;
+
+          if (data.status == 200) {
+            _this6.refreshGrid();
+
+            _this6.$Progress.finish();
+
+            _this6.processing = false;
+            $('#addnewuser').modal('hide');
+            swal("Success!", "You have reserved this block!", "success", {
+              timer: 2000
+            });
+          } else {
+            _this6.processing = false;
+
+            _this6.$Progress.fail();
+
+            swal("Error!", data.message, "error", {
+              timer: 5000
+            });
+          }
+        })["catch"](function (err) {
+          _this6.processing = false;
+
+          _this6.$Progress.fail();
+        });
+      }
+    },
+    reservedUserCheckout: function reservedUserCheckout() {
+      var _this7 = this;
+
+      this.form3.post('api/reserve/check').then(function (_ref10) {
+        var data = _ref10.data;
+
+        if (data.status == 400) {
+          $('#enterReservationId').modal('hide');
+          swal("Error!", data.message, "error", {
+            timer: 3000
+          });
+        } else {
+          _this7.$emit('updateGrid');
+
+          $('#enterReservationId').modal('hide');
+          swal("Success!", "You can park your vehicle here!", "success", {
+            timer: 2000
+          });
+        }
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    showStars: function showStars(count) {
+      this.form4.rating = count;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ParkingGridAdminComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ParkingGridAdminComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    VueTimepicker: VueTimepicker
+  },
+  data: function data() {
+    return {
+      b_name: 'Block 1',
+      parked_slots: '',
+      reserved_slots: '',
+      isReserved: false,
+      time: null,
+      parking_id: '',
+      slot_id: '',
+      processing: false,
+      templates: {},
+      form: new Form({
+        slot_id: '',
+        message_id: ''
+      })
+    };
+  },
+  computed: {
+    blockName: function blockName() {
+      return this.b_name;
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.loadTempates();
+    this.refreshGrid();
+    this.$on('updateGrid', function () {
+      _this.refreshGrid();
+    });
+    setInterval(function () {
+      _this.checkExpireReservations();
+    }, 50000);
+  },
+  methods: {
+    checkExpireReservations: function checkExpireReservations() {
+      var _this2 = this;
+
+      axios.get('api/reserve/expire').then(function (_ref) {
+        var data = _ref.data;
+
+        _this2.refreshGrid();
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    loadTempates: function loadTempates() {
+      var _this3 = this;
+
+      this.$Progress.start();
+      axios.get('api/message').then(function (_ref2) {
+        var data = _ref2.data;
+        _this3.templates = data;
+
+        _this3.$Progress.finish();
+      });
+    },
+    sendMessage: function sendMessage() {
+      var _this4 = this;
+
+      this.$Progress.start();
+      this.processing = true;
+      var park_type;
+
+      if (this.parked_slots.includes(this.slot_id)) {
+        park_type = 'paraked';
+      } else {
+        park_type = 'reserved';
+      }
+
+      axios.post('api/message/send', {
+        message_id: this.form.message_id,
+        slot_id: this.slot_id,
+        type: park_type
+      }).then(function (_ref3) {
+        var data = _ref3.data;
+
+        if (data.status == 200) {
+          $('#enterReservationId').modal('hide');
+
+          _this4.$Progress.finish();
+
+          _this4.processing = false;
+          swal("Success!", "Message sent successfully!", "success", {
+            timer: 2000
+          });
+        } else {
+          $('#enterReservationId').modal('hide');
+
+          _this4.$Progress.fail();
+
+          _this4.processing = false;
+          swal("Error!", data.message, "error", {
+            timer: 5000
+          });
+        }
+      })["catch"](function (err) {});
+    },
+    setTrue: function setTrue() {
+      this.onlyTime = true;
+    },
+    displayModal: function displayModal(id) {
+      if (this.parked_slots.includes(id) || this.reserved_slots.includes(id)) {
+        this.slot_id = id;
+        $('#enterReservationId').modal('show');
+      }
+    },
+    refreshGrid: function refreshGrid() {
+      var _this5 = this;
+
+      axios.get('api/parking').then(function (_ref4) {
+        var data = _ref4.data;
+        _this5.parked_slots = data.parked.map(function (slot) {
+          return slot.id;
+        });
+        _this5.reserved_slots = data.reserved.map(function (slot) {
+          return slot.id;
+        });
+        data.reserved.forEach(function (slot) {
+          var ls = [9, 10, 11, 12, 13, 14, 15, 16];
+
+          if (ls.includes(slot.id)) {
+            $('#' + slot.id).removeClass('parkingslot-available-left');
+            $('#' + slot.id).addClass('parkingslot-reserved-left');
+          } else {
+            $('#' + slot.id).removeClass('parkingslot-available-right');
+            $('#' + slot.id).addClass('parkingslot-reserved-right');
+          }
+        });
+        data.parked.forEach(function (slot) {
+          var ls = [9, 10, 11, 12, 13, 14, 15, 16];
+
+          if (ls.includes(slot.id)) {
+            $('#' + slot.id).removeClass('parkingslot-reserved-left');
+            $('#' + slot.id).removeClass('parkingslot-available-left');
+            $('#' + slot.id).addClass('parkingslot-booked-left');
+            $('#' + slot.id).html('<img class="parking-car-left" src="img/car.png" width="100%" alt="">');
+          } else {
+            $('#' + slot.id).removeClass('parkingslot-reserved-right');
+            $('#' + slot.id).removeClass('parkingslot-available-right');
+            $('#' + slot.id).addClass('parkingslot-booked-right');
+            $('#' + slot.id).html('<img class="parking-car-right" src="img/car.png" width="100%" alt="">');
+          }
+        });
+        data.free.forEach(function (slot) {
+          var ls = [9, 10, 11, 12, 13, 14, 15, 16];
+
+          if (ls.includes(slot.id)) {
+            $('#' + slot.id).removeClass('parkingslot-booked-left');
+            $('#' + slot.id).removeClass('parkingslot-reserved-left');
+            $('#' + slot.id).addClass('parkingslot-available-left');
+            $('#' + slot.id).html(slot.id);
+          } else {
+            $('#' + slot.id).removeClass('parkingslot-booked-right');
+            $('#' + slot.id).removeClass('parkingslot-reserved-right');
+            $('#' + slot.id).addClass('parkingslot-available-right');
+            $('#' + slot.id).html(slot.id);
+          }
+        });
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/AuthorizedClients.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/passport/AuthorizedClients.vue?vue&type=script&lang=js& ***!
@@ -59448,6 +60533,2680 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ParkingGrid.vue?vue&type=template&id=04f05303&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ParkingGrid.vue?vue&type=template&id=04f05303& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "col-md-8 col-sm-12",
+      staticStyle: { "margin-top": "100px" },
+      attrs: { id: "grid" }
+    },
+    [
+      _c("div", { staticClass: "parking-grid " }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-1" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-1 " }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "1" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(1)
+                }
+              }
+            },
+            [_vm._v("1")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "2" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(2)
+                }
+              }
+            },
+            [_vm._v("2")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "3" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(3)
+                }
+              }
+            },
+            [_vm._v("3")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "4" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(4)
+                }
+              }
+            },
+            [_vm._v("4")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "5" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(5)
+                }
+              }
+            },
+            [_vm._v("5")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "6" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(6)
+                }
+              }
+            },
+            [_vm._v("6")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "7" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(7)
+                }
+              }
+            },
+            [_vm._v("7")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top parkingslot-border-right ",
+              attrs: { id: "8" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(8)
+                }
+              }
+            },
+            [_vm._v("8\n                        ")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " })
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "row " }, [
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "9" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(9)
+                }
+              }
+            },
+            [_vm._v("9")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "10" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(10)
+                }
+              }
+            },
+            [_vm._v("10")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "11" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(11)
+                }
+              }
+            },
+            [_vm._v("11")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "12" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(12)
+                }
+              }
+            },
+            [_vm._v("12")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "13" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(13)
+                }
+              }
+            },
+            [_vm._v("13")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "14" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(14)
+                }
+              }
+            },
+            [_vm._v("14")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "15" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(15)
+                }
+              }
+            },
+            [_vm._v(" 15")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left parkingslot-border-right ",
+              attrs: { id: "16" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(16)
+                }
+              }
+            },
+            [_vm._v("16")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "17" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(17)
+                }
+              }
+            },
+            [_vm._v("17")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "18" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(18)
+                }
+              }
+            },
+            [_vm._v("18")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "19" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(19)
+                }
+              }
+            },
+            [_vm._v("19")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "20" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(20)
+                }
+              }
+            },
+            [_vm._v("20")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "21" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(21)
+                }
+              }
+            },
+            [_vm._v("21")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "22" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(22)
+                }
+              }
+            },
+            [_vm._v("22")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "23" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(23)
+                }
+              }
+            },
+            [_vm._v("23")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top parkingslot-border-right ",
+              attrs: { id: "24" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(24)
+                }
+              }
+            },
+            [_vm._v("24\n                        ")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " })
+        ]),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._m(2)
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "addnewuser",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "addnewuser",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-centered",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c("h4", { domProps: { textContent: _vm._s(_vm.b_name) } }),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ]),
+                _vm._v(" "),
+                _vm._m(4),
+                _vm._v(" "),
+                _c("div", { staticClass: "tab-content" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tab-pane active",
+                      attrs: { role: "tabpanel", id: "parkNow" }
+                    },
+                    [
+                      _c(
+                        "form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.createUser()
+                            },
+                            keydown: function($event) {
+                              return _vm.form.onKeydown($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "modal-body" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-md-6" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c("label", { attrs: { for: "name" } }, [
+                                      _vm._v("Name")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.name,
+                                          expression: "form.name"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "name"
+                                        )
+                                      },
+                                      attrs: {
+                                        type: "text",
+                                        name: "name",
+                                        placeholder: "e.g: John Doe",
+                                        id: "name"
+                                      },
+                                      domProps: { value: _vm.form.name },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.form,
+                                            "name",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: { form: _vm.form, field: "name" }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-md-6" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c(
+                                      "label",
+                                      { attrs: { for: "phone_number" } },
+                                      [_vm._v("Phone Number")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.phone_number,
+                                          expression: "form.phone_number"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "phone_number"
+                                        )
+                                      },
+                                      attrs: {
+                                        type: "text",
+                                        name: "phone_number",
+                                        placeholder: "e.g: 07********",
+                                        id: "phone_number"
+                                      },
+                                      domProps: {
+                                        value: _vm.form.phone_number
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.form,
+                                            "phone_number",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: {
+                                        form: _vm.form,
+                                        field: "phone_number"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "email" } }, [
+                                  _vm._v("Email")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.email,
+                                      expression: "form.email"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has("email")
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "email",
+                                    placeholder: "e.g: johndoe@gmail.com",
+                                    id: "email"
+                                  },
+                                  domProps: { value: _vm.form.email },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "email",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "email" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("h5", { staticClass: "text-center" }, [
+                              _vm._v("or")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "name" } }, [
+                                  _vm._v("Reservation ID")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form3.reservation_code,
+                                      expression: "form3.reservation_code"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form3.errors.has(
+                                      "reservation_code"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "reservation_code",
+                                    placeholder: "e.g: S-7855 or R-7855",
+                                    id: "reservation_code"
+                                  },
+                                  domProps: {
+                                    value: _vm.form3.reservation_code
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form3,
+                                        "reservation_code",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: {
+                                    form: _vm.form3,
+                                    field: "reservation_code"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(5)
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tab-pane",
+                      attrs: { role: "tabpanel", id: "reserve" }
+                    },
+                    [
+                      _c(
+                        "form",
+                        {
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.reserveSlot()
+                            },
+                            keydown: function($event) {
+                              return _vm.form.onKeydown($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "modal-body" }, [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-md-6" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c("label", { attrs: { for: "name" } }, [
+                                      _vm._v("Name")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form2.name,
+                                          expression: "form2.name"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form2.errors.has(
+                                          "name"
+                                        )
+                                      },
+                                      attrs: {
+                                        type: "text",
+                                        name: "name",
+                                        placeholder: "e.g: John Doe",
+                                        id: "name"
+                                      },
+                                      domProps: { value: _vm.form2.name },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.form2,
+                                            "name",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: { form: _vm.form2, field: "name" }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-md-6" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c(
+                                      "label",
+                                      { attrs: { for: "phone_number" } },
+                                      [_vm._v("Phone Number")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form2.phone_number,
+                                          expression: "form2.phone_number"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      class: {
+                                        "is-invalid": _vm.form2.errors.has(
+                                          "phone_number"
+                                        )
+                                      },
+                                      attrs: {
+                                        type: "text",
+                                        name: "phone_number",
+                                        placeholder: "e.g: 07********",
+                                        id: "phone_number"
+                                      },
+                                      domProps: {
+                                        value: _vm.form2.phone_number
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.form2,
+                                            "phone_number",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("has-error", {
+                                      attrs: {
+                                        form: _vm.form2,
+                                        field: "phone_number"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "email" } }, [
+                                  _vm._v("Email")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form2.email,
+                                      expression: "form2.email"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form2.errors.has("email")
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "email",
+                                    placeholder: "e.g: johndoe@gmail.com",
+                                    id: "email"
+                                  },
+                                  domProps: { value: _vm.form2.email },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form2,
+                                        "email",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form2, field: "email" }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("h5", { staticClass: "text-center" }, [
+                              _vm._v("or")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "name" } }, [
+                                  _vm._v("Staff Reservation ID")
+                                ]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form3.reservation_code,
+                                      expression: "form3.reservation_code"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form3.errors.has(
+                                      "reservation_code"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "reservation_code",
+                                    placeholder: "e.g: S-7855",
+                                    id: "reservation_code"
+                                  },
+                                  domProps: {
+                                    value: _vm.form3.reservation_code
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form3,
+                                        "reservation_code",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: {
+                                    form: _vm.form3,
+                                    field: "reservation_code"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "form-group d-flex justify-content-around"
+                              },
+                              [
+                                _vm._m(6),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  [
+                                    _c("vue-timepicker", {
+                                      model: {
+                                        value: _vm.reserved_time,
+                                        callback: function($$v) {
+                                          _vm.reserved_time = $$v
+                                        },
+                                        expression: "reserved_time"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "modal-footer" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-secondary",
+                                attrs: {
+                                  type: "button",
+                                  "data-dismiss": "modal"
+                                }
+                              },
+                              [_vm._v("Close")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: !_vm.processing,
+                                    expression: "!processing"
+                                  }
+                                ],
+                                staticClass: "btn btn-danger",
+                                attrs: { type: "submit" }
+                              },
+                              [_vm._v("Reserve")]
+                            )
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: { tabindex: "-1", role: "dialog", id: "enterPhoneNumber" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(7),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.userCheckout()
+                      },
+                      keydown: function($event) {
+                        return _vm.form.onKeydown($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", { attrs: { for: "phoneOrId" } }, [
+                            _vm._v("Your Phone Number or Reservation Code")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form1.phoneOrId,
+                                expression: "form1.phoneOrId"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form1.errors.has("phoneOrId")
+                            },
+                            attrs: {
+                              type: "text",
+                              name: "phoneOrId",
+                              placeholder:
+                                "Enter Your Phone Number or Reservation Code",
+                              id: "phoneOrId",
+                              "aria-describedby": "helpId"
+                            },
+                            domProps: { value: _vm.form1.phoneOrId },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form1,
+                                  "phoneOrId",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "small",
+                            {
+                              staticClass: "text-muted",
+                              attrs: { id: "helpId" }
+                            },
+                            [
+                              _vm._v(
+                                "To end your session you have to be in sys"
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form1, field: "phoneOrId" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(8)
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: { tabindex: "-1", role: "dialog", id: "enterReservationId" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(9),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.reservedUserCheckout()
+                      },
+                      keydown: function($event) {
+                        return _vm.form.onKeydown($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", { attrs: { for: "reservation_code" } }, [
+                            _vm._v("Your Reservation Code")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form3.reservation_code,
+                                expression: "form3.reservation_code"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form3.errors.has(
+                                "reservation_code"
+                              )
+                            },
+                            attrs: {
+                              type: "text",
+                              name: "reservation_code",
+                              placeholder: "Enter Your Reservation Code Here..",
+                              id: "reservation_code",
+                              "aria-describedby": "helpId"
+                            },
+                            domProps: { value: _vm.form3.reservation_code },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form3,
+                                  "reservation_code",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "small",
+                            {
+                              staticClass: "text-muted",
+                              attrs: { id: "helpId" }
+                            },
+                            [
+                              _vm._v(
+                                "Enter your reservation code for park your vehicle here"
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: {
+                              form: _vm.form3,
+                              field: "reservation_code"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(10)
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: { tabindex: "-1", role: "dialog", id: "paymentDetails" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(11),
+                _vm._v(" "),
+                _vm._m(12),
+                _vm._v(" "),
+                _c("div", { staticClass: "container mt-3 mb-3" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success mb-2 w-100",
+                      attrs: { type: "submit" },
+                      on: { click: _vm.openPaymentModal }
+                    },
+                    [_vm._v("Pay")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary w-100",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Close")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: { tabindex: "-1", role: "dialog", id: "feedbackModal" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(13),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.sendFeedback()
+                      },
+                      keydown: function($event) {
+                        return _vm.form.onKeydown($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-body mt-2" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", { attrs: { for: "feedback" } }, [
+                            _vm._v("You can help us to improve this app")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form4.feedback,
+                                expression: "form4.feedback"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form4.errors.has("feedback")
+                            },
+                            attrs: {
+                              type: "text",
+                              name: "feedback",
+                              placeholder: "e.g: This is a great app :)",
+                              id: "feedback"
+                            },
+                            domProps: { value: _vm.form4.feedback },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form4,
+                                  "feedback",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form4, field: "feedback" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "wrap" }, [
+                        _c("ul", { staticClass: "stars" }, [
+                          _c("li", {
+                            attrs: { title: "5" },
+                            on: {
+                              click: function($event) {
+                                return _vm.showStars(5)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("li", {
+                            attrs: { title: "4" },
+                            on: {
+                              click: function($event) {
+                                return _vm.showStars(4)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("li", {
+                            attrs: { title: "3" },
+                            on: {
+                              click: function($event) {
+                                return _vm.showStars(3)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("li", {
+                            attrs: { title: "2" },
+                            on: {
+                              click: function($event) {
+                                return _vm.showStars(2)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("li", {
+                            attrs: { title: "1" },
+                            on: {
+                              click: function($event) {
+                                return _vm.showStars(1)
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "required",
+                          attrs: { id: "rating", type: "hidden" }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form4.rating,
+                              expression: "form4.rating"
+                            }
+                          ],
+                          attrs: {
+                            id: "ratingval",
+                            name: "rating",
+                            type: "hidden"
+                          },
+                          domProps: { value: _vm.form4.rating },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.form4, "rating", $event.target.value)
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(14)
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "paymentModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "card-body p-1" }, [
+                    _vm._m(15),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "tab-content" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "tab-pane fade show active",
+                          attrs: { id: "nav-tab-card" }
+                        },
+                        [
+                          _c("p", { staticClass: "alert alert-success" }, [
+                            _vm._v("Some text success or error")
+                          ]),
+                          _vm._v(" "),
+                          _c("form", { attrs: { role: "form" } }, [
+                            _vm._m(16),
+                            _vm._v(" "),
+                            _vm._m(17),
+                            _vm._v(" "),
+                            _vm._m(18),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "subscribe btn btn-primary btn-block",
+                                attrs: { type: "button" },
+                                on: { click: _vm.openFeedbackModal }
+                              },
+                              [_vm._v(" Confirm  ")]
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(19),
+                      _vm._v(" "),
+                      _vm._m(20)
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row " }, [
+      _c("div", { staticClass: "col-md-12 path " })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row " }, [
+      _c("div", { staticClass: "col-md-12 path " })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-around " }, [
+      _c("div", { staticClass: "col-md-1 entrance " }, [
+        _c("i", { staticClass: "material-icons" }, [_vm._v("arrow_upward")]),
+        _vm._v(" Entrance")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-5 " }, [
+        _c("img", {
+          attrs: { src: "img/hospital.png", width: "100% ", alt: " " }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-1 entrance " }, [
+        _vm._v("Exit   "),
+        _c("i", { staticClass: "material-icons" }, [_vm._v("arrow_downward")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c(
+        "ul",
+        { staticClass: "nav nav-pills mt-2 d-flex justify-content-between" },
+        [
+          _c("li", { staticClass: "nav-item w-50" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link active",
+                attrs: { href: "#parkNow", role: "tab", "data-toggle": "tab" }
+              },
+              [_vm._v("Park Now")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item w-50" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: { href: "#reserve", role: "tab", "data-toggle": "tab" }
+              },
+              [_vm._v("Reserve")]
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Proceed")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mt-2" }, [
+      _c("label", { attrs: { for: "email" } }, [_vm._v("Reserved Time")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Ending Session")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container mb-3" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary mb-2 w-100",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("End Session")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary w-100",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Park Your Vehicle")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container mb-3" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success mb-2 w-100",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Proceed")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary w-100",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Payment Details")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body d-flex mt-3" }, [
+      _c("div", [
+        _c("div", [_c("h5", [_vm._v("Reservation ID")])]),
+        _vm._v(" "),
+        _c("div", [_c("h5", [_vm._v("Contact Number")])]),
+        _vm._v(" "),
+        _c("div", [_c("h5", [_vm._v("In Time")])]),
+        _vm._v(" "),
+        _c("div", [_c("h5", [_vm._v("Out Time")])]),
+        _vm._v(" "),
+        _c("div", [_c("h5", [_vm._v("Total Time")])]),
+        _vm._v(" "),
+        _c("div", [_c("h4", { staticClass: "text-bold" }, [_vm._v("Charge")])])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ml-4" }, [
+        _c("div", [_c("h5", [_vm._v("-")])]),
+        _vm._v(" "),
+        _c("div", [_c("h5", [_vm._v("-")])]),
+        _vm._v(" "),
+        _c("div", [_c("h5", [_vm._v("-")])]),
+        _vm._v(" "),
+        _c("div", [_c("h5", [_vm._v("-")])]),
+        _vm._v(" "),
+        _c("div", [_c("h5", [_vm._v("-")])])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "ml-4" }, [
+        _c("h5", [
+          _c("span", { staticClass: "mb-4 pb-4", attrs: { id: "ri" } }, [
+            _vm._v("S-6890")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("h5", [
+          _c("span", { staticClass: "mb-4 pb-4", attrs: { id: "cn" } }, [
+            _vm._v("0712381996")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("h5", [
+          _c("span", { attrs: { id: "in_time" } }, [_vm._v("7 : 34 p.m")])
+        ]),
+        _vm._v(" "),
+        _c("h5", [
+          _c("span", { attrs: { id: "out_time" } }, [_vm._v("10 : 00 p.m")])
+        ]),
+        _vm._v(" "),
+        _c("h5", [
+          _c("span", { attrs: { id: "total_time" } }, [_vm._v("2h 15m")])
+        ]),
+        _vm._v(" "),
+        _c("h4", [_c("span", { attrs: { id: "charge" } }, [_vm._v("LKR 500")])])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Your Feedback")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container mt-2 mb-3" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-danger mb-2 w-100", attrs: { type: "submit" } },
+        [_vm._v("Submit")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary w-100",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "ul",
+      {
+        staticClass: "nav bg-light nav-pills rounded nav-fill mb-3",
+        attrs: { role: "tablist" }
+      },
+      [
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link active",
+              attrs: { "data-toggle": "pill", href: "#nav-tab-card" }
+            },
+            [
+              _c("i", { staticClass: "fa fa-credit-card" }),
+              _vm._v(" Credit Card")
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: { "data-toggle": "pill", href: "#nav-tab-paypal" }
+            },
+            [_c("i", { staticClass: "fab fa-paypal" }), _vm._v("  Paypal")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: { "data-toggle": "pill", href: "#nav-tab-bank" }
+            },
+            [
+              _c("i", { staticClass: "fa fa-university" }),
+              _vm._v("  Bank Transfer")
+            ]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "username" } }, [
+        _vm._v("Full name (on the card)")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "username", placeholder: "", required: "" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "cardNumber" } }, [_vm._v("Card number")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-group" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", name: "cardNumber", placeholder: "" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group-append" }, [
+          _c("span", { staticClass: "input-group-text text-muted" }, [
+            _c("i", { staticClass: "fab fa-cc-visa" }),
+            _vm._v("   "),
+            _c("i", { staticClass: "fab fa-cc-amex" }),
+            _vm._v("  \n\t\t\t\t\t"),
+            _c("i", { staticClass: "fab fa-cc-mastercard" })
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-8" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [
+            _c("span", { staticClass: "hidden-xs" }, [_vm._v("Expiration")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "number", placeholder: "MM", name: "" }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "number", placeholder: "YY", name: "" }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "label",
+            {
+              attrs: {
+                "data-toggle": "tooltip",
+                title: "",
+                "data-original-title": "3 digits code on back side of the card"
+              }
+            },
+            [_vm._v("CVV "), _c("i", { staticClass: "fa fa-question-circle" })]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "number", required: "" }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "tab-pane fade", attrs: { id: "nav-tab-paypal" } },
+      [
+        _c("p", [_vm._v("Paypal is easiest way to pay online")]),
+        _vm._v(" "),
+        _c("p", [
+          _c(
+            "button",
+            { staticClass: "btn btn-primary", attrs: { type: "button" } },
+            [
+              _c("i", { staticClass: "fab fa-paypal" }),
+              _vm._v(" Log in my Paypal ")
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("strong", [_vm._v("Note:")]),
+          _vm._v(
+            " Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. "
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "tab-pane fade", attrs: { id: "nav-tab-bank" } },
+      [
+        _c("p", [_vm._v("Bank accaunt details")]),
+        _vm._v(" "),
+        _c("dl", { staticClass: "param" }, [
+          _c("dt", [_vm._v("BANK: ")]),
+          _vm._v(" "),
+          _c("dd", [_vm._v(" THE WORLD BANK")])
+        ]),
+        _vm._v(" "),
+        _c("dl", { staticClass: "param" }, [
+          _c("dt", [_vm._v("Accaunt number: ")]),
+          _vm._v(" "),
+          _c("dd", [_vm._v(" 12345678912345")])
+        ]),
+        _vm._v(" "),
+        _c("dl", { staticClass: "param" }, [
+          _c("dt", [_vm._v("IBAN: ")]),
+          _vm._v(" "),
+          _c("dd", [_vm._v(" 123456789")])
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _c("strong", [_vm._v("Note:")]),
+          _vm._v(
+            " Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. "
+          )
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ParkingGridAdminComponent.vue?vue&type=template&id=8b71d95e&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ParkingGridAdminComponent.vue?vue&type=template&id=8b71d95e& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "col-md-8 col-sm-12 ", attrs: { id: "grid" } },
+    [
+      _c("div", { staticClass: "parking-grid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-1" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-1 " }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "1" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(1)
+                }
+              }
+            },
+            [_vm._v("1")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "2" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(2)
+                }
+              }
+            },
+            [_vm._v("2")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "3" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(3)
+                }
+              }
+            },
+            [_vm._v("3")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "4" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(4)
+                }
+              }
+            },
+            [_vm._v("4")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "5" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(5)
+                }
+              }
+            },
+            [_vm._v("5")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "6" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(6)
+                }
+              }
+            },
+            [_vm._v("6")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "7" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(7)
+                }
+              }
+            },
+            [_vm._v("7")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-1 parkingslot-available-right parkingslot-border-left-top parkingslot-border-right ",
+              attrs: { id: "8" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(8)
+                }
+              }
+            },
+            [_vm._v("8\n                 ")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " })
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "row " }, [
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "9" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(9)
+                }
+              }
+            },
+            [_vm._v("9")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "10" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(10)
+                }
+              }
+            },
+            [_vm._v("10")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "11" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(11)
+                }
+              }
+            },
+            [_vm._v("11")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "12" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(12)
+                }
+              }
+            },
+            [_vm._v("12")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "13" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(13)
+                }
+              }
+            },
+            [_vm._v("13")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "14" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(14)
+                }
+              }
+            },
+            [_vm._v("14")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left ",
+              attrs: { id: "15" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(15)
+                }
+              }
+            },
+            [_vm._v(" 15")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-left parkingslot-border-left parkingslot-border-right ",
+              attrs: { id: "16" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(16)
+                }
+              }
+            },
+            [_vm._v("16")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "17" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(17)
+                }
+              }
+            },
+            [_vm._v("17")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "18" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(18)
+                }
+              }
+            },
+            [_vm._v("18")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "19" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(19)
+                }
+              }
+            },
+            [_vm._v("19")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "20" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(20)
+                }
+              }
+            },
+            [_vm._v("20")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "21" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(21)
+                }
+              }
+            },
+            [_vm._v("21")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "22" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(22)
+                }
+              }
+            },
+            [_vm._v("22")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top ",
+              attrs: { id: "23" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(23)
+                }
+              }
+            },
+            [_vm._v("23")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-md-1 parkingslot-available-right parkingslot-border-left-top parkingslot-border-right ",
+              attrs: { id: "24" },
+              on: {
+                click: function($event) {
+                  return _vm.displayModal(24)
+                }
+              }
+            },
+            [_vm._v("24\n                 ")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 " })
+        ]),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._m(2)
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: { tabindex: "-1", role: "dialog", id: "enterReservationId" }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.sendMessage()
+                      },
+                      keydown: function($event) {
+                        return _vm.form.onKeydown($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", { attrs: { for: "type" } }, [
+                            _vm._v("Staff Type")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.message_id,
+                                  expression: "form.message_id"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has("message_id")
+                              },
+                              attrs: {
+                                type: "text",
+                                name: "message_id",
+                                id: "message_id"
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "message_id",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "" } }, [
+                                _vm._v("Select message type")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.templates, function(template) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: template.id,
+                                    domProps: { value: template.id }
+                                  },
+                                  [_vm._v(_vm._s(template.title))]
+                                )
+                              })
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "type" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "container mb-3" }, [
+                      _c(
+                        "button",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.processing,
+                              expression: "!processing"
+                            }
+                          ],
+                          staticClass: "btn btn-success mb-2 w-100",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Proceed")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary w-100",
+                          attrs: { type: "button", "data-dismiss": "modal" }
+                        },
+                        [_vm._v("Close")]
+                      )
+                    ])
+                  ]
+                )
+              ])
+            ]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row " }, [
+      _c("div", { staticClass: "col-md-12 path " })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row " }, [
+      _c("div", { staticClass: "col-md-12 path " })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-around " }, [
+      _c("div", { staticClass: "col-md-1 entrance " }, [
+        _c("i", { staticClass: "material-icons" }, [_vm._v("arrow_upward")]),
+        _vm._v(" Entrance")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-5 " }, [
+        _c("img", {
+          attrs: { src: "img/hospital.png", width: "100% ", alt: " " }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-1 entrance " }, [
+        _vm._v("Exit   "),
+        _c("i", { staticClass: "material-icons" }, [_vm._v("arrow_downward")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Send Message")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/passport/AuthorizedClients.vue?vue&type=template&id=397d14ca&scoped=true&":
 /*!*****************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/passport/AuthorizedClients.vue?vue&type=template&id=397d14ca&scoped=true& ***!
@@ -78361,9 +82120,9 @@ Vue.component("passport-authorized-clients", __webpack_require__(/*! ./component
 Vue.component("passport-personal-access-tokens", __webpack_require__(/*! ./components/passport/PersonalAccessTokens.vue */ "./resources/js/components/passport/PersonalAccessTokens.vue")["default"]);
 Vue.component("page-not-found", __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module './components/404.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()))["default"]);
 Vue.component("pagination", __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js"));
-Vue.component("parking-grid", __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module './components/ParkingGrid.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()))["default"]);
+Vue.component("parking-grid", __webpack_require__(/*! ./components/ParkingGrid.vue */ "./resources/js/components/ParkingGrid.vue")["default"]);
 Vue.component("customer-complaint", __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module './components/ComplaintComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()))["default"]);
-Vue.component("parking-grid-admin", __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module './components/ParkingGridAdminComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()))["default"]);
+Vue.component("parking-grid-admin", __webpack_require__(/*! ./components/ParkingGridAdminComponent.vue */ "./resources/js/components/ParkingGridAdminComponent.vue")["default"]);
 var app = new Vue({
   el: "#app",
   router: router,
@@ -78578,6 +82337,144 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_040e2ab9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_040e2ab9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ParkingGrid.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/ParkingGrid.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ParkingGrid_vue_vue_type_template_id_04f05303___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ParkingGrid.vue?vue&type=template&id=04f05303& */ "./resources/js/components/ParkingGrid.vue?vue&type=template&id=04f05303&");
+/* harmony import */ var _ParkingGrid_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ParkingGrid.vue?vue&type=script&lang=js& */ "./resources/js/components/ParkingGrid.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ParkingGrid_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ParkingGrid_vue_vue_type_template_id_04f05303___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ParkingGrid_vue_vue_type_template_id_04f05303___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ParkingGrid.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ParkingGrid.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/ParkingGrid.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkingGrid_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ParkingGrid.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ParkingGrid.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkingGrid_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ParkingGrid.vue?vue&type=template&id=04f05303&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/ParkingGrid.vue?vue&type=template&id=04f05303& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkingGrid_vue_vue_type_template_id_04f05303___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ParkingGrid.vue?vue&type=template&id=04f05303& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ParkingGrid.vue?vue&type=template&id=04f05303&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkingGrid_vue_vue_type_template_id_04f05303___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkingGrid_vue_vue_type_template_id_04f05303___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ParkingGridAdminComponent.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/ParkingGridAdminComponent.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ParkingGridAdminComponent_vue_vue_type_template_id_8b71d95e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ParkingGridAdminComponent.vue?vue&type=template&id=8b71d95e& */ "./resources/js/components/ParkingGridAdminComponent.vue?vue&type=template&id=8b71d95e&");
+/* harmony import */ var _ParkingGridAdminComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ParkingGridAdminComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ParkingGridAdminComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ParkingGridAdminComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ParkingGridAdminComponent_vue_vue_type_template_id_8b71d95e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ParkingGridAdminComponent_vue_vue_type_template_id_8b71d95e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ParkingGridAdminComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ParkingGridAdminComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/ParkingGridAdminComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkingGridAdminComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ParkingGridAdminComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ParkingGridAdminComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkingGridAdminComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ParkingGridAdminComponent.vue?vue&type=template&id=8b71d95e&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/ParkingGridAdminComponent.vue?vue&type=template&id=8b71d95e& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkingGridAdminComponent_vue_vue_type_template_id_8b71d95e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ParkingGridAdminComponent.vue?vue&type=template&id=8b71d95e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ParkingGridAdminComponent.vue?vue&type=template&id=8b71d95e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkingGridAdminComponent_vue_vue_type_template_id_8b71d95e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParkingGridAdminComponent_vue_vue_type_template_id_8b71d95e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
