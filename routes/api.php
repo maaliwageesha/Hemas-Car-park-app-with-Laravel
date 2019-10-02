@@ -42,3 +42,4 @@ Route::get('payment/filter', 'PaymentController@filter')->name('payment.filter')
 Route::get('regular', 'StaffController@regular')->name('payment.regular');
 Route::post('regular', 'StaffController@store_reg')->name('payment.store_reg');
 Route::post('staff/check', 'StaffController@check')->name('staff.check');
+Route::get('findReservation', 'ReservationController@search');
