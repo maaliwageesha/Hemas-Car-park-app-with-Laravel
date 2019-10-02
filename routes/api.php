@@ -42,10 +42,3 @@ Route::get('payment/filter', 'PaymentController@filter')->name('payment.filter')
 Route::get('regular', 'StaffController@regular')->name('payment.regular');
 Route::post('regular', 'StaffController@store_reg')->name('payment.store_reg');
 Route::post('staff/check', 'StaffController@check')->name('staff.check');
-Route::post('staff/reserve', 'StaffController@resrve')->name('staff.reserve');
-Route::get('profile', 'API\UserController@profile');
-Route::put('profile', 'API\UserController@updateProfile');
-Route::get('findUser', 'StaffController@search');
-Route::get('findTemp', 'StaffController@tempSearch');
-Route::get('findPayment', 'PaymentController@search');
-Route::get('findReservation', 'ReservationController@search');
