@@ -32,9 +32,9 @@ Route::apiResources([
     'attendance' => 'AttendanceController',
     ]);
 Route::post('parking/settled', 'ParkingsController@paimentSettled')->name('parking.paimentSettled');
-Route::post('parking/check', 'ParkingsController@check')->name('parking.check');
+//Route::post('parking/check', 'ParkingsController@check')->name('parking.check');
 
-Route::post('message/send', 'MessageController@send')->name('message.send');
+//Route::post('message/send', 'MessageController@send')->name('message.send');
 Route::post('reserve/check', 'ReservationController@check')->name('reserve.check');
 Route::get('payment', 'PaymentController@index')->name('payment.index');
 Route::delete('payment/{id}', 'PaymentController@destroy')->name('payment.destroy');
