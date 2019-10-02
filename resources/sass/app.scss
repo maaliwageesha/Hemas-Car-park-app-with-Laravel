@@ -1,0 +1,134 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+$fa-font-path: "../webfonts";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import '~admin-lte/dist/css/adminlte.css';
+@import '~admin-lte/plugins/overlayScrollbars/css/overlayScrollbars.min.css';
+@import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "@fortawesome/fontawesome-free/scss/solid.scss";
+@import "@fortawesome/fontawesome-free/scss/brands.scss";
+
+.router-link-exact-active {
+    background-color: #128185;
+    color: #fff !important;
+}
+
+.nav-link:hover {
+    background-color: #18b9b9 !important;
+    color: #fff !important;
+}
+
+$stars-settings: (
+  'font-size': 48px,
+  'color': #f0b111,
+  'unset-color': #c3c3c3
+);
+
+$icon: (
+  'star': "\f005",
+  'star-o': "\f006"
+);
+
+%icon {
+  font: {
+    family: FontAwesome;
+    weight: normal;
+    style: normal;
+  }
+  display: inline-block;
+  text-decoration: inherit;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+}
+
+@mixin icon($icon) {
+  &::before {
+    @extend %icon;
+    content: $icon;
+  }
+}
+
+// Reset
+@import url(https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css);
+
+// Icon Font
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css);
+
+body {
+  background-color: #efefef;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.wrap {
+  display: inline-block;
+  padding: 4rem 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+.stars {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  display: inline-block;
+  text-align: left;
+  li {
+    cursor: pointer;
+    display: block;
+    // float: right;
+    padding: 0 0.375rem;
+    display: inline-block;
+    font-size: map-get($stars-settings, 'font-size');
+    color: map-get($stars-settings, 'unset-color');
+    @include icon( map-get($icon, 'star-o') );
+    &.active,
+    &.active ~ li,
+    &:hover,
+    &:hover ~ li {
+      color: map-get($stars-settings, 'color');
+      @include icon( map-get($icon, 'star') );
+    }
+  }
+}
+$stars-settings2: (
+  'font-size': 15px,
+  'color': #f0b111,
+//   'unset-color': #c3c3c3
+);
+
+$icon2: (
+  'star': "\f005",
+  'star-o': "\f006"
+);
+.stars2 {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  display: inline-block;
+  text-align: left;
+  li {
+    display: inline-block;
+    // float: right;
+    padding: 0;
+    display: inline-block;
+    font-size: map-get($stars-settings2, 'font-size');
+    color: map-get($stars-settings2, 'unset-color');
+    @include icon( map-get($icon2, 'star-o') );
+
+      color: map-get($stars-settings2, 'color');
+      @include icon( map-get($icon2, 'star') );
+
+  }
+}
