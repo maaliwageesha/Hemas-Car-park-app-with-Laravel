@@ -32,6 +32,14 @@ let routes = [
     { path: "/payment", component: require('./components/PaymentComponent.vue').default },
     { path: "/booking", component: require('./components/BookingComponent.vue').default },
     { path: "/complaints", component: require('./components/ComplaintsAdminViewComponent.vue').default },
+    //{ path: "/settings", component: require('./components/SettingsComponent.vue').default },
+    //{ path: "/feedback", component: require('./components/FeedbackComponent.vue').default },
+    //{ path: "/regular", component: require('./components/RegularMembers.vue').default },
+    //{ path: "/attendance", component: require('./components/AttendanceComponent.vue').default },
+    //{ path: "/users", component: require('./components/Users.vue').default },
+    //{ path: "/profile", component: require('./components/Profile.vue').default },
+   // { path: "/products", component: require('./components/products/Products.vue').default },
+    //{ path: "*", component: require('./components/404.vue').default },
     
 ];
 
