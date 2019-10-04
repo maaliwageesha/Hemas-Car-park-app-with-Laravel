@@ -23,16 +23,16 @@ Route::resource('parking', 'ParkingsController');
 Route::get('parking', 'ParkingsController@check')->name('parking.check');
 
 // report routes
-//Route::get('payment-report', 'ReportGeneratorController@payment');
-//Route::get('message-report', 'ReportGeneratorController@message');
+Route::get('payment-report', 'ReportGeneratorController@payment');
+Route::get('message-report', 'ReportGeneratorController@message');
 
 //template report route
-//Route::get('template-report', 'ReportGeneratorController@template');
+Route::get('template-report', 'ReportGeneratorController@template');
 
-//Route::get('Resavation-report', 'ReportGeneratorController@ReserveSlot');
+Route::get('Resavation-report', 'ReportGeneratorController@ReserveSlot');
 
 //Feedback-report
 
-//Route::get('Feedback-report', 'ReportGeneratorController@FeedbackReop');
+Route::get('Feedback-report', 'ReportGeneratorController@FeedbackReop');
 
 Route::get('{path}', 'HomeController@index')->where('path', '([A-z]+)?');
