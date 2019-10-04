@@ -22,7 +22,7 @@ class ComplaintController extends Controller
         Complaint::create($validated_data);
         return ['status' => 200, 'message' => 'success'];
     }
-
+    //destroy
     public function destroy($id)
     {
         $complaint = Complaint::findOrFail($id);
