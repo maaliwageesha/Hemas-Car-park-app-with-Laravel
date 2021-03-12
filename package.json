@@ -26,7 +26,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.9.0",
         "admin-lte": "^3.0.0-alpha.2",
-        "jspdf": "^1.5.3",
+        "jspdf": "^2.3.1",
         "laravel-vue-pagination": "^2.3.0",
         "moment": "^2.24.0",
         "sweetalert": "^2.1.2",
